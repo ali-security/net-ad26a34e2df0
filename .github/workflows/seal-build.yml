@@ -1,6 +1,7 @@
 name: seal-build
 
-on: [push, workflow_dispatch]
+on:
+  workflow_dispatch:
 
 jobs:
   module-zip:
@@ -35,6 +36,7 @@ jobs:
           path: ${{ runner.temp }}/out/v0.43.0.zip
           if-no-files-found: error
 
+    timeout-minutes: 40
   test:
     strategy:
       fail-fast: false
@@ -61,3 +63,4 @@ jobs:
         run: |
           set -eux
           go test ./...
+    timeout-minutes: 40
